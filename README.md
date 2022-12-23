@@ -7,12 +7,12 @@ PDF Regex Marker is written in [Python](https://en.wikipedia.org/wiki/Python_(pr
 # Installation
 
 ## Linux
-* [Linux Executable](https://github.com/jessemcg/).
+* [Linux Executable](https://github.com/jessemcg/pdf-regex-marker/blob/master/regex_marker).
 
 For Linux, installation is very straightforward; just download and start using the linux executable file. Ghostscript comes preinstalled with all major distributions. Make sure the file is executable (with Gnome, right click, go to properties, go to permissions, and check the execute box). Optional: Use an app like [Pin It](https://flathub.org/apps/details/com.github.ryonakano.pinit) to create a .desktop file to add to the desktop environment.
 
 ## Windows
-* [Windows Executable](https://github.com/jessemcg/).
+* [Windows Executable](https://github.com/jessemcg/pdf-regex-marker/blob/master/regex_marker_win.exe).
 
 For Windows, you will need to download Ghostscript and set the PATH variable to make Ghostscript executable. From the Ghostscript website, download the latest AGPL version (64 bit) and install. Keep track of where it installs. To set the PATH variable, I found this [helpful guide](https://www.wikihow.com/Change-the-PATH-Environment-Variable-on-Windows). Here are the basic steps:
 1. Open the settings dialog and type "path."
