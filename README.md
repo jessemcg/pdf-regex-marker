@@ -32,6 +32,8 @@ Or place the above command in a script launching app like [Launcher](https://ext
    
 # Usage
 
+To test right away, simply press run. The input folder and regex folder already have some simple content for testing. See below for further background.
+
 ## The Input Folder
 
 The input folder is where you place the large pdf file that already contains embedded text. You can also place multiple pdf files in this folder that are numbered sequentially (if number is double-digits, pad single digit numbers with a leading zero). PDF Regex Marker will combine those files into one large pdf document before moving on to the next step. This is useful if your normal practice is to divide a large record into smaller portions for OCR processing.
