@@ -17,16 +17,17 @@ from pdfoutline_mod import pdfoutline
 
 # Global Variables
 # Directories
-input_folder = './directories/input_folder'
-regexes_folder = './directories/regexes'
-text_record_folder = './directories/text_record'
-completed_records_folder = './directories/completed_records'
+home_folder = os.path.expanduser('~')
+input_folder = os.path.join(home_folder, 'pdf-regex-marker/directories/input_folder')
+regexes_folder = os.path.join(home_folder, 'pdf-regex-marker/directories/regexes')
+text_record_folder = os.path.join(home_folder, 'pdf-regex-marker/directories/text_record')
+completed_records_folder = os.path.join(home_folder, 'pdf-regex-marker/directories/completed_records')
 
 # Files
-toc_file = './directories/TOC/toc.txt'
-combined_pdf_path = './directories/input_folder/combined.pdf'
-completed_record_pdf = './directories/completed_records/completed_record.pdf'
-redo_completed_record_pdf = './directories/completed_records/redo_completed_record.pdf'
+toc_file = os.path.join(home_folder, 'pdf-regex-marker/directories/TOC/toc.txt')
+combined_pdf_path = os.path.join(home_folder, 'pdf-regex-marker/directories/input_folder/combined.pdf')
+completed_record_pdf = os.path.join(home_folder, 'pdf-regex-marker/directories/completed_records/completed_record.pdf')
+redo_completed_record_pdf = os.path.join(home_folder, 'pdf-regex-marker/directories/completed_records/redo_completed_record.pdf')
 
 class PDFMarker(Gtk.ApplicationWindow):
         
