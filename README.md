@@ -50,7 +50,7 @@ Thanks to [pdfoutline](https://github.com/yutayamamoto/pdfoutline), the TOC file
 
 As mentioned above, after an initial run, you can manually edit the TOC file, then press "redo" to apply the edited TOC file to a new pdf named "redo_completed_record.pdf." This is a useful feature because even a very good set of regular expressions can sometimes fail to match phrases or apply unexpected matches.
 
-![](toc.png)
+![](images/toc.png)
 
 ## Developing a Good Set of Regular Expressions
 
@@ -58,7 +58,7 @@ The usefulness of PDF Regex Marker will depend on how good your regular expressi
 
 Here is one example. The following is the first page of a minute order with the corresponding text file. The goal will be to match the date.
 
-![](sample.png)
+![](images/sample.png)
 
 This is the regular expression used to match the date:
 
