@@ -1,33 +1,34 @@
 # PDF Regex Marker
 PDF Regex Marker is an application for automatically bookmarking large pdf documents by using [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to match desired patterns. It was designed to bookmark legal transcripts, but there may be other uses. The user must supply a pdf file, or files, that already have embedded text (through [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) or generated from a word processor), as well as separately-named text files that include the desired regular expressions. PDF Regex Marker first creates a separate text file for each page of the pdf document and sequentially numbers those pages. The application then runs each regular expression against each text file, and creates a table of contents file (TOC file) based on the resulting matches. Finally, the application uses the TOC file to apply bookmarks to the original pdf document. The bookmarks are categorized based on the name given to each text file containing regular expressions. After an initial run, the user can manually make corrections or additions to the TOC file, then apply the bookmarks (the "redo" option).
 
-PDF Regex Marker is written in [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), but requires [Ghostscript](https://ghostscript.com/) to be installed. [Pyinstaller](https://github.com/pyinstaller/pyinstaller) is used to create a single executable file with all dependencies included -- except for ghostscript. [PysimpleGui](https://github.com/PySimpleGUI) is used to create the graphical user interface (GUI). PDF Regex Marker was inspired by [splittotext](https://github.com/kampji/splittotext), and makes heavy use of [pdfoutline](https://github.com/yutayamamoto/pdfoutline).
+PDF Regex Marker is written in Python, has a GTK4 GUI, and only works on linux. It relies on Ghostscript, which is preinstalled on most linux distributions. It also relies on the following python modules that can be installed via the requirements file:
 
-![](pdf_regex_marker.png)
+* click
+* pdftotext
+* PyPDF4
+
+PDF Regex Marker was inspired by [splittotext](https://github.com/kampji/splittotext), and makes heavy use of [pdfoutline](https://github.com/yutayamamoto/pdfoutline).
+
+<img src="images/screenshot.png" width="50%">
 
 # Installation
+Place files in home directory
 
-## Linux
-* [Linux Executable](https://github.com/jessemcg/pdf-regex-marker/blob/master/regex_marker)
+	git clone https://github.com/jessemcg/pdf-regex-marker.git
 
-For Linux, installation is very straightforward; just download and start using the linux executable file. Ghostscript comes preinstalled with all major distributions. Make sure the file is executable (with Gnome, right click, go to properties, go to permissions, and check the execute box). Optional: Use an app like [Pin It](https://flathub.org/apps/details/com.github.ryonakano.pinit) to create a .desktop file to add to the desktop environment.
+Ensure that the python files are executable
 
-## Windows
-* [Windows Executable](https://github.com/jessemcg/pdf-regex-marker/blob/master/regex_marker_win.exe)
+	chmod +x -R $HOME/pdf-regex-marker
 
-For Windows, you will need to download Ghostscript and set the PATH variable to make Ghostscript executable. From the Ghostscript website, download the latest AGPL version (64 bit) and install. Keep track of where it installs. To set the PATH variable, I found this [helpful guide](https://www.wikihow.com/Change-the-PATH-Environment-Variable-on-Windows). Here are the basic steps:
-1. Open the settings dialog and type "path."
-2. Select "Edit the system environment variable."
-3. On the resulting "System Properties" dialog, choose "Environmental Variables..." at the bottom.
-4. In the "Environmental Variables" dialog, highlight "PATH" and click on "Edit..."
-5. In the "Edit environmental variable" dialog, add the path for the Ghostscript "bin" folder by typing it in, or by using the Browse option. The default location is this: "C:\Program Files\gs\gs10.00.0\bin"
-6. Reboot.
-7. To confirm that Ghostscript is working, go to the command prompt and type "gswin64.exe" The Ghostscript shell should open.
+Install python modules not in standard library
 
-After Ghostscript is installed, the "regex_marker.exe" file should work like any other ".exe" file. Temporary files will be created wherever the "regex_marker.exe" file is stored. You can pin the file to the taskbar by dragging it to the taskbar.  
+	pip install -r $HOME/pdf-regex-marker/requirements.txt
 
-## A Note on Ghostscript
-As explained [here](https://artifex.com/blog/changes-to-the-pdf-interpreter), the newest version of Ghostscript no longer uses the [Postscript](https://en.wikipedia.org/wiki/PostScript) by default. This is a problem because PDF Regex Marker uses the pdfmark operator, which only works with Postcript. For now, we can still access the Postscript interpreter with the "-dNEWPDF=FALSE" flag. However, the maintainers of Ghostscript state that this option will go away in the future. Therefore, PDF Regex Marker might require an older version of Ghostscript in the future.
+Run the "pdf_marker.py" file
+
+	python $HOME/pdf-regex-marker/pdf_marker.py
+
+Or place the above command in a script launching app like [Launcher](https://extensions.gnome.org/extension/5874/launcher/).
    
 # Usage
 
@@ -53,7 +54,7 @@ As mentioned above, after an initial run, you can manually edit the TOC file, th
 
 ## Developing a Good Set of Regular Expressions
 
-The usefulness of PDF Regex Marker will depend on how good your regular expressions are. This requires learning the [syntax](https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf), and unfortunately, some trial and error. The goal should be to create regular expressions that are broad enough to match patterns or phrases over a wide array of documents, but specific enough to exclude irrelevant phrases.
+The usefulness of PDF Regex Marker will depend on how good your regular expressions are. This requires learning the [syntax](https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf), and unfortunately, some trial and error. The goal should be to create regular expressions that are broad enough to match patterns or phrases over a wide array of documents, but specific enough to exclude irrelevant phrases. Consult GPT-4 for assistance.
 
 Here is one example. The following is the first page of a minute order with the corresponding text file. The goal will be to match the date.
 
@@ -71,5 +72,3 @@ This is the regular expression used to match the date:
 * The third parenthesis that starts with "?=" is a look-a-head non-capturing group. The computer looks ahead of the capturing groups to see if there is also a match for this non-capturing group. This is how we can ensure that only dates from the first page of a minute order will be returned, and not every date in the entire pdf.
 * ".*" means any character any number of times. "\n" means new line. ".*8:30\s+?AM" matches the time 8:30 AM. "\n.*Hon" denotes another new line followed by any number of characters followed by "Hon." Thus, the non-capturing group is designed to identify something unique in the first page of each minute order, which is that the date is closely followed by a specific time (8:30) and Honorable ... I could have included the entire word "Honorable" but "Hon" made it specific enough. Use [regex101.com](https://regex101.com/) to test regular expressions and learn more details about what each symbol means.
 * Sometimes there will be minor deviations either from the OCR process or the text extraction process. In the above minute order, for example, I learned that there are sometimes empty characters right after the date but before the new line starts, and sometimes the new line starts right away. We can deal with this by using the "|" symbol to include two versions of a non-capturing group; one that starts with ".*" and one that does not.
-## File Size
-The size of the completed, bookmarked pdf can be fairly large. I have tried a few open source solutions to compress the final pdf, including Ghostcript, but none have worked very well. The "reduce file size" option on Adobe Acrobat seems to work the best. It reduces the file size by about 40% without any loss of image quality.

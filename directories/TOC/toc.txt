@@ -1,0 +1,14 @@
+ARTICLES 0001
+	Article. I. 0002
+	Article. II. 0006
+	Article. III. 0008
+	Article. IV. 0009
+	Article. VI. 0010
+AMENDMENTS 0001
+	Amendment I. 0012
+	Amendment VI. 0013
+	Amendment XIV. 0014
+	Amendment XV. 0015
+	Amendment XX. 0016
+	Amendment XXV. 0018
+
