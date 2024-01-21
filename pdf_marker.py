@@ -64,25 +64,25 @@ class PDFMarker(Gtk.ApplicationWindow):
         # Button Definitions
         # Input
         self.input_folder_button = Gtk.Button(label="Input")
-        self.input_folder_button.set_size_request(150, 40)  # width and height
+        self.input_folder_button.set_size_request(150, -1)  # width and height
         self.input_folder_button.connect("clicked", self.input_folder)
         grid.attach(self.input_folder_button, 0, 1, 1, 1)
         
         # REGEX
         self.regex_folder_button = Gtk.Button(label="REGEX")
-        self.regex_folder_button.set_size_request(150, 40)  # width and height
+        self.regex_folder_button.set_size_request(150, -1)  # width and height
         self.regex_folder_button.connect("clicked", self.regex_folder)
         grid.attach(self.regex_folder_button, 1, 1, 1, 1)
         
         # Text Record      
         self.text_file_folder_button = Gtk.Button(label="TextRecord")
-        self.text_file_folder_button.set_size_request(150, 40)  # width and height
+        self.text_file_folder_button.set_size_request(150, -1)  # width and height
         self.text_file_folder_button.connect("clicked", self.text_file_folder)
         grid.attach(self.text_file_folder_button, 2, 1, 1, 1)
         
         # Completed
         self.completed_records_button = Gtk.Button(label="Completed")
-        self.completed_records_button.set_size_request(150, 40)  # width and height
+        self.completed_records_button.set_size_request(150, -1)  # width and height
         self.completed_records_button.connect("clicked", self.completed_records)
         grid.attach(self.completed_records_button, 3, 1, 1, 1)
         
@@ -94,19 +94,19 @@ class PDFMarker(Gtk.ApplicationWindow):
         
         # TOC
         self.toc_file_button = Gtk.Button(label="TOC")
-        self.toc_file_button.set_size_request(150, 40)  # width and height
+        self.toc_file_button.set_size_request(150, -1)  # width and height
         self.toc_file_button.connect("clicked", self.toc_file)
         grid.attach(self.toc_file_button, 0, 3, 1, 1)
         
         # Run
         self.run_button = Gtk.Button(label="Run")
-        self.run_button.set_size_request(150, 40)  # width and height
+        self.run_button.set_size_request(150, -1)  # width and height
         self.run_button.connect("clicked", self.run)
         grid.attach(self.run_button, 1, 3, 1, 1)
         
         # Redo Run
         self.redo_button = Gtk.Button(label="ReDo")
-        self.redo_button.set_size_request(150, 40)  # width and height
+        self.redo_button.set_size_request(150, -1)  # width and height
         self.redo_button.connect("clicked", self.redo)
         grid.attach(self.redo_button, 2, 3, 1, 1)
         
