@@ -50,7 +50,7 @@ The text file folder will -- after pressing "run" -- contain a separate text fil
 
 Thanks to [pdfoutline](https://github.com/yutayamamoto/pdfoutline), the TOC file is easy to read and edit. It's just a list of the categories with each bookmark and page number indented underneath it.
 
-I strongly recommend first runnning CreateTOC, then inspecting the resulting TOC file before running BookMark. This way you can make sure that your regular expressions are working correctly and manually edit the TOC file for small changes. Even an excellent set of regular expressions may not work perfectly against thousands of pages of scanned pdf pages, which may vary in terms of quality and clarity.
+I strongly recommend first runnning CreateTOC, then inspecting the resulting TOC file before running BookMark. This way, you can make sure that your regular expressions are working correctly, and you can manually edit the TOC file to make small changes. Even an excellent set of regular expressions may not work perfectly against thousands of pages of scanned pdf pages, which may vary in quality and clarity.
 
 ![](images/toc.png)
 
