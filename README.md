@@ -1,5 +1,5 @@
 # PDF Regex Marker
-PDF Regex Marker is an application for automatically bookmarking large pdf documents by using [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to match desired patterns. It was designed to bookmark legal transcripts, but there may be other uses. The user must supply a pdf file, or files, that already have embedded text (through [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) or generated from a word processor), as well as separately-named text files that include the desired regular expressions. PDF Regex Marker first creates a separate text file for each page of the pdf document and sequentially numbers those pages. The application then runs each regular expression against each text file, and creates a table of contents file (TOC file) based on the resulting matches. Finally, the application uses the TOC file to apply bookmarks to the original pdf document. The bookmarks are categorized based on the name given to each text file containing regular expressions. After an initial run, the user can manually make corrections or additions to the TOC file, then apply the bookmarks (the "redo" option).
+PDF Regex Marker is an application for automatically bookmarking large pdf documents by using [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to match desired patterns. It was designed to bookmark legal transcripts, but there may be other uses. The user must supply a pdf file, or files, that already have embedded text (through [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) or generated from a word processor), as well as separately-named text files that include the desired regular expressions. PDF Regex Marker first creates a separate text file for each page of the pdf document and sequentially numbers those pages. The application then runs each regular expression against each text file, and creates a table of contents file (TOC file) based on the resulting matches. Finally, the application uses the TOC file to apply bookmarks to the original pdf document. The bookmarks are categorized based on the name given to each text file containing regular expressions.
 
 PDF Regex Marker is written in Python, has a GTK4 GUI, and only works on linux. It relies on Ghostscript, which is preinstalled on most linux distributions. It also relies on the following python modules that can be installed via the requirements file:
 
@@ -46,11 +46,11 @@ The regex folder is where you place the text files that contain your regular exp
 
 The text file folder will -- after pressing "run" -- contain a separate text file for each page of the larger pdf document. The point of this folder is to allow the user to develop better regular expressions. For example, if you thought that a given regular expression was going to match a specific phrase but failed to do so, you can go to the specific text file and paste the contents into a web site like [regex101.com](https://regex101.com/) or use an app that does a similar thing. From there, you can test your regular expression to see what the problem was.
 
-## The TOC File and Redo Option
+## Running the App
 
 Thanks to [pdfoutline](https://github.com/yutayamamoto/pdfoutline), the TOC file is easy to read and edit. It's just a list of the categories with each bookmark and page number indented underneath it.
 
-As mentioned above, after an initial run, you can manually edit the TOC file, then press "redo" to apply the edited TOC file to a new pdf named "redo_completed_record.pdf." This is a useful feature because even a very good set of regular expressions can sometimes fail to match phrases or apply unexpected matches.
+I strongly recommend first runnning CreateTOC, then inspecting the resulting TOC file before running BookMark. This way you can make sure that your regular expressions are working correctly and manually edit the TOC file for small changes. Even an excellent set of regular expressions may not work perfectly against thousands of pages of scanned pdf pages, which may vary in terms of quality and clarity.
 
 ![](images/toc.png)
 
