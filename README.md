@@ -1,7 +1,7 @@
 # PDF Regex Marker
 PDF Regex Marker is an application for automatically bookmarking large pdf documents by using [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to match desired patterns. It was designed to bookmark legal transcripts, but there may be other uses. The user must supply a pdf file, or files, that already have embedded text (through [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) or generated from a word processor), as well as separately-named text files that include the desired regular expressions. PDF Regex Marker first creates a separate text file for each page of the pdf document and sequentially numbers those pages. The application then runs each regular expression against each text file, and creates a table of contents file (TOC file) based on the resulting matches. Finally, the application uses the TOC file to apply bookmarks to the original pdf document. The bookmarks are categorized based on the name given to each text file containing regular expressions.
 
-PDF Regex Marker is written in Python, has a GTK4 GUI, and only works on linux. It relies on Ghostscript, which is preinstalled on most linux distributions. It also relies on the following python modules that can be installed via the requirements file:
+PDF Regex Marker is written in Python, has a GTK4 GUI, and only works on linux. Windows users can use [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). PDF Regex Marker relies on Ghostscript, which is preinstalled on most linux distributions. It also relies on the following python modules that can be installed via the requirements file:
 
 * click
 * pdftotext
@@ -28,7 +28,7 @@ Run the "pdf_marker.py" file
 
 	python $HOME/pdf-regex-marker/pdf_marker.py
 
-Or place the above command in a script launching app like [Launcher](https://extensions.gnome.org/extension/5874/launcher/).
+Or place the above command in a script launching app like [Launcher](https://extensions.gnome.org/extension/5874/launcher/) or create a .desktop file for it with something like [Pin It](https://flathub.org/apps/com.github.ryonakano.pinit).
    
 # Usage
 
