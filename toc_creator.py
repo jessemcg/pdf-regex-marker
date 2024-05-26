@@ -3,46 +3,43 @@
 import os
 import shutil
 import pdftotext
+import PyPDF2
 from gi.repository import GLib
 import re
-from PyPDF4 import PdfFileMerger
 
 def create_toc(text_record_folder, input_folder, combined_pdf_path, toc_file, regexes_folder, update_progress=None):
-
     # create temp folder with text_record folder; replace old one if already exists
     if os.path.exists(text_record_folder):
         shutil.rmtree(text_record_folder)
     os.makedirs(text_record_folder)
     
-    # Merge any PDF files that are in the input folder
-    pdf_merger = PdfFileMerger()
+    # merge all pdfs in the input folder
+    pdf_merger = PyPDF2.PdfMerger()
 
-    # Iterate over all PDF files in the input folder
-    for item in sorted(os.listdir(input_folder)):
-        if item.endswith('.pdf'):
-            pdf_path = os.path.join(input_folder, item)
-            # Open the PDF file in binary read mode and append
-            with open(pdf_path, 'rb') as pdf_file:
-                pdf_merger.append(pdf_file)
+    # get a list of all PDF files in the directory
+    pdf_files = [f for f in os.listdir(input_folder) if f.endswith('.pdf')]
+    pdf_files.sort()  # Sort the files to maintain order
+    
+    for pdf in pdf_files:
+        with open(os.path.join(input_folder, pdf), 'rb') as file:
+            pdf_merger.append(file)
 
-    # Save the combined PDF to a file
-    combined_pdf_path = os.path.join(input_folder, 'combined.pdf')
-    with open(combined_pdf_path, 'wb') as out_pdf:
-        pdf_merger.write(out_pdf)
-    pdf_merger.close()
-        
-    # Read the combined PDF and create separate text files for each page
-    with open(combined_pdf_path, "rb") as f:
-        pdf = pdftotext.PDF(f)
-        
-    # Create separate text file for each pdf page and place them in text_record folder
+    with open(combined_pdf_path, 'wb') as output_file:
+        pdf_merger.write(combined_pdf_path)
+
+    # open combined pdf file
+    with open(combined_pdf_path, 'rb') as f:
+        pdf = pdftotext.PDF(f, physical=True)
+        total_pages = len(pdf)
+
+    # create separate text file for each pdf page and place them in text_record folder
     for page_number, page_content in enumerate(pdf, start=1):
         filename = os.path.join(text_record_folder, f'{page_number:04}.txt')
-        with open(filename, 'w') as text_file:
-            text_file.write(page_content)
+        with open(filename, 'w') as f:
+            f.write(page_content)
         if update_progress:
-            update_progress(page_number / len(pdf))
-            
+            update_progress(page_number / total_pages)
+
     # replace the old table of contents file, create one if not there
     if os.path.exists(toc_file):
         os.remove(toc_file)
@@ -72,11 +69,11 @@ def create_toc(text_record_folder, input_folder, combined_pdf_path, toc_file, re
                         regex_hit = f'\t{a.group()} {record_file}\n'
                         toc_object.write(regex_hit)
                         
-    # Add a new blank line to the end of the toc.txt so awk will work)
+    # add a new blank line to the end of the toc.txt so awk will work)
     with open(toc_file, 'a') as toc_object:
         toc_object.write('\n')
         
-    # Option to further modify the toc file with a bash script
+    # optionally modify the toc file with a bash script
     #if os.path.exists("bash_script.sh"):
         #os.system("bash bash_script.sh")
 
