@@ -9,7 +9,7 @@ PDF Regex Marker is written in Python, has a GTK4 GUI, and only works on linux. 
 
 PDF Regex Marker was inspired by [splittotext](https://github.com/kampji/splittotext), and makes heavy use of [pdfoutline](https://github.com/yutayamamoto/pdfoutline).
 
-<img src="images/screenshot.png" width="675">
+<img src="images/screenshot.png" >
 
 # Installation
 Place files in home directory
