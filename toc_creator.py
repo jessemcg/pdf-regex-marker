@@ -56,7 +56,7 @@ def create_toc(text_record_folder, input_folder, combined_pdf_path, toc_file, re
                 toc_object.write(d + ' 0001' + '\n')
 
         # open and read all text files in the text_record folder
-        for record_file in os.listdir(text_record_folder):
+        for record_file in sorted(os.listdir(text_record_folder), key=lambda x: int(x.split('.')[0])):
             with open(os.path.join(text_record_folder, record_file)) as f:
                 x = f.read()
             # run each regex against each text file in the record
